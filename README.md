@@ -78,11 +78,11 @@ chi_ad(x, p)
 
 ## Interprétation du test
 
-- H0 : le dé est équilibré (toutes les faces ont la même probabilité)  
-- H1 : le dé n’est pas équilibré (au moins une face a une probabilité différente)  
+- H0 : le dé est équilibré (toutes les faces ont la même probabilité).  
+- H1 : le dé n’est pas équilibré (au moins une face a une probabilité différente).  
 
 ### Décision :  
-Comme p-valeur = 0.5905 > 0.05, on ne rejette pas H0 au seuil de 5 %  
+Comme p-valeur = 0.5905 > 0.05, on ne rejette pas H0 au seuil de 5 %.  
 
 ### Conclusion :  
 Il n’y a pas de différence significative entre les effectifs observés et ceux attendus.    
