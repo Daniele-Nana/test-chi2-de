@@ -1,5 +1,7 @@
 
-# Test du Khi-Deux d’adéquation - Vérification d’un dé équilibré
+# Test du Khi-Deux d’adéquation 
+
+# Vérification d’un dé équilibré
 
 ## Objectif
 
