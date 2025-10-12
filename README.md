@@ -6,6 +6,7 @@
 Ce projet a pour but d’écrire une fonction `chi_ad(x, p)` qui permet d’effectuer le **test du chi² d’adéquation** afin de vérifier si un dé est équilibré.
 
 ### Fonctionnalités principales :
+
 1. Vérifie que `p` est un **vecteur de probabilités** (la somme doit être égale à 1).  
 2. Vérifie que **toutes les coordonnées de `x`** (effectifs observés) sont **supérieures à 5**.  
 3. Si les conditions sont remplies, effectue le **test du χ² d’adéquation** et renvoie :
@@ -18,10 +19,12 @@ Ce projet a pour but d’écrire une fonction `chi_ad(x, p)` qui permet d’effe
 ## Code Python
 
 ```python
+
 import numpy as np
 import scipy.stats as stat
 
-def chi_ad(x, p):
+def chi_ad(x, p) :
+
     """
     Test du Chi-Deux d'adéquation.
 
@@ -39,29 +42,28 @@ def chi_ad(x, p):
     """
 
     # Vérifie que p est un vecteur de probabilités
-    if round(np.sum(p), 10) != 1:
+    if round(np.sum(p), 10) != 1 :    # Pour éviter les erreurs d'imprécisions 
         return "Erreur : p n'est pas un vecteur de probabilités (somme ≠ 1)."
 
     # Vérifie que les coordonnées de x sont > 5
-    if min(x) <= 5:
+    if min(x) <= 5 :
         return "Erreur : toutes les coordonnées de x doivent être > 5."
 
-    # Calcul du test du chi2 d’adéquation
-    z = sum(x)
-    y = np.array(p) * z
-    ddl = len(x) - 1
-    chi2_stat, chi2_p_valeur = stat.chisquare(x, y)
+    z = sum(x)    # Effectifs total
+    y = np.array(p) * z    # Effectifs attendus 
+    ddl = len(x) - 1    # Degrés de liberté
+    chi2_stat, chi2_p_valeur = stat.chisquare(x, y)    # Test du chi2 d’adéquation
 
+    # Affichage des résultats du test
     print(f"Statistique du test χ² : {chi2_stat:.4f}")
     print(f"Degrés de liberté : {ddl}")
     print(f"P-valeur : {chi2_p_valeur:.4f}")
-
     return [chi2_stat, ddl, chi2_p_valeur]
 
 # Données utilisées 
 
-x = [127, 108, 123, 118, 115, 135]
-p = [1/6] * 6
+x = [127, 108, 123, 118, 115, 135]    # Effectifs réels 
+p = [1/6] * 6    # Probabilités attendues d'un dé équilibré
 
 chi_ad(x, p)
 ```
