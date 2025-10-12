@@ -58,7 +58,7 @@ def chi_ad(x, p):
 
     return [chi2_stat, ddl, chi2_p_valeur]
 
-# Exemple d'utilisation
+# Données utilisées 
 
 x = [127, 108, 123, 118, 115, 135]
 p = [1/6] * 6
@@ -66,13 +66,13 @@ p = [1/6] * 6
 chi_ad(x, p)
 ```
 
-### Résultats du test
+## Résultats du test
 
 - Statistique du test χ² : 3.7190  
 - Degrés de liberté : 5  
 - P-valeur : 0.5905
 
-### Interprétation du test
+## Interprétation du test
 
 - H0 : le dé est équilibré (toutes les faces ont la même probabilité)  
 - H1 : le dé n’est pas équilibré (au moins une face a une probabilité différente)  
@@ -81,5 +81,5 @@ Décision :
 Comme p-valeur = 0.5905 > 0.05, on ne rejette pas H0 au seuil de 5 %  
 
 Conclusion :  
-Il n’y a pas de différence significative entre les effectifs observés et ceux attendus.
+Il n’y a pas de différence significative entre les effectifs observés et ceux attendus.    
 Le dé paraît équilibré.
