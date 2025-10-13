@@ -18,7 +18,7 @@ Ce projet a pour but d’écrire une fonction `chi_ad(x, p)` qui permet d’effe
 
 ---
 
-## Code Python
+## Test du Chi-Deux d'adéquation (χ²) pour un dé équilibré
 
 ```python
 
@@ -73,9 +73,13 @@ chi_ad(x, p)
 
 ## Résultats du test
 
+```text
 - Statistique du test χ² : 3.7190  
 - Degrés de liberté : 5  
 - P-valeur : 0.5905
+
+[3.7190, 5, 0.5905]
+```
 
 ## Interprétation du test
 
