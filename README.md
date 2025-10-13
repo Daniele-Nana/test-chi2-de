@@ -69,6 +69,7 @@ p = [1/6] * 6    # Probabilités attendues d'un dé équilibré
 
 chi_ad(x, p)
 ```
+---
 
 ## Résultats du test
 
