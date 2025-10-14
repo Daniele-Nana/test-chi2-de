@@ -7,7 +7,7 @@
 
 Ce projet a pour but d’écrire une fonction `chi_ad(x, p)` qui permet d’effectuer le **test du chi² d’adéquation** afin de vérifier si un dé est équilibré.
 
-### Fonctionnalités principales :
+### Fonctionnalités principales 
 
 1. Vérifie que `p` est un **vecteur de probabilités** (la somme doit être égale à 1).  
 2. Vérifie que **toutes les coordonnées de `x`** (effectifs observés) sont **supérieures à 5**.  
@@ -69,9 +69,8 @@ p = [1/6] * 6    # Probabilités attendues d'un dé équilibré
 
 chi_ad(x, p)
 ```
----
 
-## Résultats du test
+## Résultats 
 
 ```text
 - Statistique du test χ² : 3.7190  
@@ -81,14 +80,14 @@ chi_ad(x, p)
 [3.7190, 5, 0.5905]
 ```
 
-## Interprétation du test
+## Interprétation 
 
 - H0 : le dé est équilibré (toutes les faces ont la même probabilité).  
 - H1 : le dé n’est pas équilibré (au moins une face a une probabilité différente).  
 
-### Décision :  
+### Décision 
 Comme p-valeur = 0.5905 > 0.05, on ne rejette pas H0 au seuil de 5 %.  
 
-### Conclusion :  
+### Conclusion 
 Il n’y a pas de différence significative entre les effectifs observés et ceux attendus.    
 Le dé paraît équilibré.
