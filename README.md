@@ -1,93 +1,83 @@
+# Test du chi² d'adéquation – Vérification de l'équilibre d'un dé
 
-# Test du Khi-Deux d’adéquation 
+## Contexte
 
-# Vérification d’un dé équilibré
+Dans l'industrie statistique, le test du chi² d'adéquation (*goodness‑of‑fit*) permet de comparer une distribution observée à une distribution théorique. Ce projet implémente une fonction R robuste pour réaliser ce test, puis l'applique à un cas concret : vérifier si un dé à six faces est équilibré à partir d'un échantillon de lancers.
 
-## Objectif
+## Structure du projet
 
-Ce projet a pour but d’écrire une fonction `chi_ad(x, p)` qui permet d’effectuer le **test du chi² d’adéquation** afin de vérifier si un dé est équilibré.
+Le dépôt contient un unique fichier R Markdown (`test-chi2-de.Rmd`) qui regroupe :
 
-### Fonctionnalités principales 
+- L'implémentation de la fonction `chi.ad(x, p)` avec vérifications des conditions d'application.
+- L'application aux données observées du dé.
+- Les calculs de la statistique, des degrés de liberté et de la p‑valeur.
+- Les visualisations (diagramme en barres comparant effectifs observés et attendus).
+- L'interprétation et la conclusion.
 
-1. Vérifie que `p` est un **vecteur de probabilités** (la somme doit être égale à 1).  
-2. Vérifie que **toutes les coordonnées de `x`** (effectifs observés) sont **supérieures à 5**.  
-3. Si les conditions sont remplies, effectue le **test du χ² d’adéquation** et renvoie :
-   - la statistique du test `chi2_stat`,  
-   - le nombre de degrés de liberté `ddl`,  
-   - la p-valeur `p_valeur`.
+## Technologies utilisées
 
----
+- **R (version ≥ 3.6)** – langage statistique.
+- **R Markdown** – pour la création d'un rapport reproductible mêlant code et commentaires.
+- **Packages R** :
+  - `knitr` – pour la compilation du notebook.
+  - `rmarkdown` – pour la production de rapports HTML/PDF.
+  - `ggplot2` *(optionnel)* – pour des graphiques plus avancés.
 
-## Test du Chi-Deux d'adéquation (χ²) pour un dé équilibré
+## Prérequis et installation
 
-```python
+### 1. Installer R
 
-import numpy as np
-import scipy.stats as stat
+Téléchargez R depuis [CRAN](https://cran.r-project.org/) et installez‑le sur votre système.
 
-def chi_ad(x, p) :
+### 2. Installer les packages nécessaires
 
-    """
-    Test du Chi-Deux d'adéquation.
-
-    Paramètres :
-    ------------
-    x : liste ou array
-        Effectifs observés.
-    p : liste ou array
-        Probabilités théoriques (somme = 1).
-
-    Retour :
-    --------
-    [chi2_stat, ddl, p_valeur] si les conditions sont respectées.
-    Sinon, message d'erreur descriptif.
-    """
-
-    # Vérifie que p est un vecteur de probabilités
-    if round(np.sum(p), 10) != 1 :    # Pour éviter les erreurs d'imprécisions 
-        return "Erreur : p n'est pas un vecteur de probabilités (somme ≠ 1)."
-
-    # Vérifie que les coordonnées de x sont > 5
-    if min(x) <= 5 :
-        return "Erreur : toutes les coordonnées de x doivent être > 5."
-
-    z = sum(x)    # Effectifs total
-    y = np.array(p) * z    # Effectifs attendus 
-    ddl = len(x) - 1    # Degrés de liberté
-    chi2_stat, chi2_p_valeur = stat.chisquare(x, y)    # Test du chi2 d’adéquation
-
-    # Affichage des résultats du test
-    print(f"Statistique du test χ² : {chi2_stat:.4f}")
-    print(f"Degrés de liberté : {ddl}")
-    print(f"P-valeur : {chi2_p_valeur:.4f}")
-    return [chi2_stat, ddl, chi2_p_valeur]
-
-# Données utilisées 
-
-x = [127, 108, 123, 118, 115, 135]    # Effectifs réels 
-p = [1/6] * 6    # Probabilités attendues d'un dé équilibré
-
-chi_ad(x, p)
+Ouvrez R et exécutez :
+```r
+install.packages(c("knitr", "rmarkdown"))
 ```
 
-## Résultats 
-
-```text
-- Statistique du test χ² : 3.7190  
-- Degrés de liberté : 5  
-- P-valeur : 0.5905
-
-[3.7190, 5, 0.5905]
+Si vous souhaitez utiliser `ggplot2` pour les graphiques :
+```r
+install.packages("ggplot2")
 ```
 
-## Interprétation 
+### 3. Récupérer le projet
 
-- H0 : le dé est équilibré (toutes les faces ont la même probabilité).  
-- H1 : le dé n’est pas équilibré (au moins une face a une probabilité différente).  
+Clonez ce dépôt ou téléchargez le fichier `chi2_de.Rmd` :
+```bash
+git clone https://github.com/Daniele-Nana/test-chi2-de.git
+```
 
-### Décision 
-Comme p-valeur = 0.5905 > 0.05, on ne rejette pas H0 au seuil de 5 %.  
+### 4. Exécution
 
-### Conclusion 
-Il n’y a pas de différence significative entre les effectifs observés et ceux attendus.    
-Le dé paraît équilibré.
+- Ouvrez `test-chi2-de.Rmd` dans RStudio ou dans un éditeur supportant R Markdown (VS Code avec extension R).
+- Exécutez les cellules une à une ou utilisez le bouton **Knit** pour générer un rapport HTML complet.
+
+## Hypothèses du test
+
+- **H₀** : le dé est équilibré → chaque face a une probabilité théorique de 1/6.
+- **H₁** : le dé n'est pas équilibré → au moins une face a une probabilité différente.
+
+> **Conditions d'application** : tous les effectifs observés doivent être ≥ 5 (vérifiées par la fonction).
+
+## Résultats obtenus
+
+| Statistique | Degrés de liberté | p‑valeur |
+|:-----------:|:-----------------:|:--------:|
+| 3.7195      | 5                 | 0.5905   |
+
+- Seuil α = 0,05.
+- La p‑valeur (0,5905) est supérieure à α.
+- **Conclusion** : on ne rejette pas H₀. Les écarts observés sont compatibles avec un dé équilibré.
+
+## Pistes d'amélioration
+
+1. **Généralisation** : adapter la fonction pour accepter des probabilités théoriques quelconques, pas seulement équiprobables.
+2. **Simulation** : ajouter une validation par simulation Monte Carlo pour étudier la puissance du test.
+3. **Interface utilisateur** : créer une application Shiny permettant à l'utilisateur de saisir ses propres effectifs et de visualiser le résultat en temps réel.
+4. **Rapport dynamique** : générer automatiquement un rapport PDF/HTML avec des commentaires interprétatifs paramétrés.
+5. **Intégration continue** : utiliser GitHub Actions pour exécuter le notebook à chaque commit et publier le rapport.
+
+## Auteur
+
+Daniele Nana
