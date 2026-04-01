@@ -1,4 +1,6 @@
 
+Test du Chi² d’adéquation
+
 Développement de la fonction chi.ad(x, p)
 
 Structure de la fonction
