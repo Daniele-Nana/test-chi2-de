@@ -1,0 +1,55 @@
+
+Développement de la fonction chi.ad(x, p)
+
+Structure de la fonction
+
+```{r}
+chi.ad <- function(x, p) {
+  # Vérification que p est un vecteur de probabilités valide
+  if (!is.numeric(p)) stop("p doit être un vecteur numérique")
+  if (any(p < 0 | p > 1)) stop("Les probabilités doivent être comprises entre 0 et 1")
+  if (abs(sum(p) - 1) > 1e-10) stop("La somme des probabilités doit être égale à 1")
+  
+  # Vérification que les effectifs observés sont >= 5
+  if (any(x < 5)) stop("Tous les effectifs observés doivent être >= 5")
+  
+  # Calcul de la statistique du chi²
+  n <- sum(x)
+  expected <- n * p
+  chi2 <- sum((x - expected)^2 / expected)
+  ddl <- length(x) - 1
+  p_value <- pchisq(chi2, df = ddl, lower.tail = FALSE)
+  
+  # Retourne une liste
+  return(list(chi2 = chi2, ddl = ddl, p_value = p_value))
+}
+```
+
+Application : test d’équilibre d’un dé
+
+Saisir les données
+
+```{r}
+obs <- c(127, 108, 123, 118, 115, 135)
+p_theo <- rep(1/6, 6)
+```
+
+Appliquer la fonction
+
+```{r}
+resultat_de <- chi.ad(obs, p_theo)
+print(resultat_de)
+```
+
+Le test du chi² d’adéquation donne une p‑valeur de 0,59, largement supérieure au seuil de 5 %.
+On conclut donc que le dé est équilibré : les écarts observés par rapport à la distribution théorique ne sont pas statistiquement significatifs.
+
+Visualisation des effectifs observés vs attendus
+
+```{r}
+obs <- c(127, 108, 123, 118, 115, 135)
+attendus <- rep(sum(obs)/6, 6)
+
+barplot(rbind(obs, attendus), beside = TRUE,
+        col = c("steelblue"))
+```
